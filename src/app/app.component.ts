@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Authentication } from './services/~authentication'
+
 
 @Component({
   selector: 'app-root',
@@ -20,14 +22,28 @@ export class AppComponent {
       url: '/list',
       icon: 'list'
     }
+    /*{
+      title: 'Registrarse',
+      url: '/signup',
+      icon: 'people'
+    }*/
   ];
+
+  public appPipe = [
+    { title: 'Registrarse', url: '/signup', icon:'logo-angular' }
+  ]
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public auth: Authentication
   ) {
     this.initializeApp();
+  }
+
+  logout(){
+    this.auth.logout();
   }
 
   initializeApp() {

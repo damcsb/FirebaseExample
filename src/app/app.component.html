@@ -8,7 +8,8 @@
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+          <div *ngFor="let p of appPages">
+          <ion-menu-toggle auto-hide="false">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
@@ -16,6 +17,21 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
+          </div>
+
+
+          <div *ngFor="let p of appPipe">
+              <ion-menu-toggle auto-hide="false" *ngIf="!auth.token">
+                <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+                  <ion-icon slot="start" [name]="p.icon"></ion-icon>
+                  <ion-label>
+                    {{p.title}}
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+              </div>
+
+          <ion-button (click)="logout()" *ngIf="!!auth.token">Log out</ion-button>
         </ion-list>
       </ion-content>
     </ion-menu>
